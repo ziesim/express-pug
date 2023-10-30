@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+    h1= title
+
+    label(for="gewicht") Gewicht: 
+    input(type="text", name="gewicht", id="gewicht", value=gewicht)
+    span   in Kilogramm (z.B.: 85)
+    br
+    label(for="koerpergroesse") Körpergröße: 
+    input(type="text", name="koerpergroesse", id="koerpergroesse", value=koerpergroesse)
+    span   in Meter (z.B.: 1.77)
+    br
+    button(onClick='calculateBMI()') Berechnen
+
+    p(id="bmi") 
+
+    script(src="/javascripts/bmiScript.js")
