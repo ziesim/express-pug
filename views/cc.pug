@@ -3,16 +3,13 @@ extends layout
 block content
     h1= title
 
-    label(for="ciphertext") Ciphertext: 
-    textarea(name="ciphertext", id="ciphertext", cols="30", rows="10")
+    form(action="/cc", method="POST") 
+        label(for="ciphertext") Ciphertext: 
+        textarea(name="ciphertext", id="ciphertext", cols="30", rows="10")
 
-    button(onClick='autoDecrypt()') Automatisch entschlüsseln 
+        label(for="key") Schlüssel: 
+        input(type="text", name="key", id="key") 
 
-    label(for="key") Schlüssel: 
-    input(type="text", name="key", id="key") 
+        button(type="submit") Submit 
 
-    button(onClick='manuDecrypt()') Manuell entschlüsseln
-
-    p(id="res")
-
-    script(src="/javascripts/ccScript.js")
+    p(name="result") Entschlüsselter Text: #{result}

@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var ccRouter = require('./routes/cc');
 var dctRouter = require('./routes/dct');
 var bmiRouter = require('./routes/bmi');
+const { log } = require('console');
 
 var app = express();
 
@@ -27,9 +28,13 @@ app.use('/dct', dctRouter);
 app.use('/bmi', bmiRouter);
 
 // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+console.log("-----------------------------------------");
+console.log("---   URL >> http://localhost:3000/   ---");
+console.log("-----------------------------------------");
 
 // error handler
 app.use(function(err, req, res, next) {
