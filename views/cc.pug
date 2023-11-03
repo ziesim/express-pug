@@ -6,10 +6,10 @@ block content
     form(action="/cc", method="POST") 
         label(for="ciphertext") Ciphertext: 
         textarea(name="ciphertext", id="ciphertext", cols="30", rows="10")
-
+        br
         label(for="key") Schlüssel: 
         input(type="text", name="key", id="key") 
-
-        button(type="submit") Submit 
+        br
+        button(type="submit") Text entschlüsseln 
 
     p(name="result") Entschlüsselter Text: #{result}

@@ -3,11 +3,10 @@ extends layout
 block content
   h1= title
 
-  label(for="matrix") Matrix:
-  textarea(name="matrix", id="matrix", cols="30", rows="10")
+  form(action="dct", method="POST")
+    label(for="matrix") Matrix:
+    textarea(name="matrix", id="matrix", cols="30", rows="10")
+    br
+    button(onClick='compute()') DCT berechnen
 
-  button(onClick='compute()') DCT berechnen
-
-  table(id="dct-table") 
-
-  script(src="/javascripts/dctScript.js")
+  p(id="dct-table") #{dct}
