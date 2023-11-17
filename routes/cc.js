@@ -1,46 +1,38 @@
-// Express.js-Framework
 var express = require('express');
-// Erstellung eines Express-Routers
 var router = express.Router();
-// Middleware zur Verarbeitung von Formulardaten
 var bodyParser = require('body-parser');
 
-// Einrichten der 'body-parser'-Middleware
 router.use(bodyParser.urlencoded({ extended: false }));
 
-// Definition der HTTP GET-Route für die Startseite
 router.get('/', function(req, res, next) {
-  // Rendern der 'bmi'-Ansicht (Template) und Bereitstellen von Anfangsdaten
-  res.render('cc', { title: 'CC', result: "", key: ""});
+  res.render('cc', { title: 'Ceasars Cipher', result: "", key: ""});
 });
 
-// Definition der HTTP POST-Route für Formulardaten
 router.post('/', function(req, res, next) {
-  // Extrahieren der Formulardaten aus der Anfrage
   var ciphertext = req.body.ciphertext;
   var schluessel = parseInt(req.body.key);
-
-  console.log('Received schluessel:', schluessel); // Hinzugefügte Zeile
-  console.log(isNaN(schluessel));
 
   var result = "";
 
   if (isNaN(schluessel)) {
     result = autoDecrypt(ciphertext);
+
+    const [keySubstring, decryptedTextSubstring] = result.split('DecryptedText: ');
+
+    schluessel = parseInt(keySubstring.replace('Schlüssel: ', ''));
+    result = decryptedTextSubstring.trim();
   } else {
     result = manuDecrypt(ciphertext, schluessel);
   }
 
-  // Rendern der 'bmi'-Ansicht mit den berechneten Werten und dem Titel
-  res.render('cc', { title: 'CC', result: result, key: schluessel });
+  res.render('cc', { title: 'Ceasars Cipher', result: result, key: schluessel });
 });
 
 function autoDecrypt(ciphertext) {
   let encryptedText = ciphertext;
-  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
   const possibleKeys = [];
 
-  const germanWords = ['der', 'die', 'das', 'und', 'in', 'den', 'nicht', 'von', 'zu', 'mit']; // Beispielsweise
+  const germanWords = ['der', 'die', 'das', 'und', 'in', 'den', 'nicht', 'von', 'zu', 'mit'];
 
   for (let key = 0; key < 26; key++) {
     const decryptedText = encryptedText.split('').map(char => decryptChar(char, key)).join('');
@@ -49,7 +41,6 @@ function autoDecrypt(ciphertext) {
     possibleKeys.push({ key, score: wordMatches });
   }
 
-  // Hilfsfunktion zum Verschlüsseln eines einzelnen Zeichens
   function decryptChar(char, key) {
     if (char.match(/[a-z]/i)) {
       const isLowerCase = char === char.toLowerCase();
@@ -65,7 +56,7 @@ function autoDecrypt(ciphertext) {
   const mostLikelyKey = possibleKeys[0].key;
   const decryptedText = encryptedText.split('').map(char => decryptChar(char, mostLikelyKey)).join('');
 
-  return "MostLikeyKey: " + mostLikelyKey + "DecryptedText: " + decryptedText;
+  return "Schlüssel: " + mostLikelyKey + " DecryptedText: " + decryptedText;
 }
 
 function manuDecrypt(ciphertext, schluessel) {
@@ -76,7 +67,6 @@ function manuDecrypt(ciphertext, schluessel) {
     console.log("Ungültige Eingabe");
   }
 
-  // Hilfsfunktion zum Verschlüsseln eines einzelnen Zeichens
   function decryptChar(char, key) {
     if (char.match(/[a-z]/i)) {
       const isLowerCase = char === char.toLowerCase();
@@ -87,11 +77,9 @@ function manuDecrypt(ciphertext, schluessel) {
     return char;
   }
 
-  // Entschlüsseln des gesamten Texts
   const decryptedText = encryptedText.split('').map(char => decryptChar(char, key)).join('');
 
   return decryptedText;
 }
 
-// Exportieren des Routers für die Verwendung in anderen Teilen der Anwendung
 module.exports = router;

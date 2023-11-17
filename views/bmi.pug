@@ -1,17 +1,20 @@
 extends layout
 
 block content
-    h1= title
+  h1= title
 
-    form(action="/bmi", method="POST") 
-        label(for="gewicht") Gewicht:
-        input(type="text", name="gewicht", id="gewicht", value=gewicht)
-        span in Kilogramm (z.B.: 85)
-        br
-        label(for="koerpergroesse") Körpergröße:
-        input(type="text", name="koerpergroesse", id="koerpergroesse", value=koerpergroesse)
-        span in Meter (z.B.: 1.77)
-        br
-        button(type="submit") BMI berechnen
+  form(action="/bmi", method="POST") 
+    div(class="textfields")
+      label(for="gewicht") Gewicht:
+      input(type="text", name="gewicht", id="gewicht", value=gewicht)
+      span in Kilogramm (z.B.: 85)
+    div(class="textfields")
+      label(for="koerpergroesse") Körpergröße:
+      input(type="text", name="koerpergroesse", id="koerpergroesse", value=koerpergroesse)
+      span in Meter (z.B.: 1.77)
+    div
+      button(type="submit", class="submitBtns") BMI berechnen
 
-    p(name="bmi") Dein BMI beträgt: #{bmi}
+  button(onClick="window.location.href='/'" class="routeBtns") Back
+
+  p(name="bmi") Dein BMI beträgt: #{bmi}

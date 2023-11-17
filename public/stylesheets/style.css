@@ -1,8 +1,45 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Open Sans", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+}
+
+.submitBtns {
+  background-color: greenyellow;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+.routeBtns {
+  background-color: aqua;
+  border-radius: 10px;
+  margin-right: 40px;
+  padding: 10px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  
+}
+
+.textfields {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.result {
+  display: block;
+  font-weight: bold;
 }

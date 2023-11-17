@@ -1,15 +1,19 @@
 extends layout
 
 block content
-    h1= title
+  h1= title
 
-    form(action="/cc", method="POST") 
-        label(for="ciphertext") Ciphertext: 
-        textarea(name="ciphertext", id="ciphertext", cols="30", rows="10")
-        br
-        label(for="key") Schlüssel: 
-        input(type="text", name="key", id="key") 
-        br
-        button(type="submit") Text entschlüsseln 
+  form(action="/cc", method="POST") 
+    div(class="textfields")
+      label(for="ciphertext") Ciphertext: 
+      textarea(name="ciphertext", id="ciphertext", cols="30", rows="10")
+    div(class="textfields")
+      label(for="key") Schlüssel: 
+      input(type="text", name="key", id="key") 
+    div
+      button(type="submit", class="submitBtns") Text entschlüsseln 
 
-    p(name="result") Entschlüsselter Text: #{result}
+  button(onClick="window.location.href='/'" class="routeBtns") Back
+
+  p(name="key" class="result") Schlüssel: #{key}
+  p(name="result" class="result") Entschlüsselter Text: #{result}

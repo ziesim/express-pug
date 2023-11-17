@@ -4,9 +4,20 @@ block content
   h1= title
 
   form(action="dct", method="POST")
-    label(for="matrix") Matrix:
-    textarea(name="matrix", id="matrix", cols="30", rows="10")
-    br
-    button(onClick='compute()') DCT berechnen
+    div(class="textfields")
+      label(for="matrix") Matrix:
+      textarea(name="matrix", id="matrix", cols="30", rows="10")
+    div
+      button(type="submit", class="submitBtns") DCT berechnen 
 
-  p(id="dct-table") #{dct}
+  button(onClick="window.location.href='/'" class="routeBtns") Back
+
+  p(name="result", class="result") Output:
+
+  if dct.length > 0
+    table
+      each row in dct
+        tr
+          each value in row
+            td= value
+
